@@ -45,4 +45,5 @@ jobs:
           source_branch: "update_changelog/${{ github.event.release.name }}"
           destination_branch: "trunk"
           pr_title: "Updated changelog to include ${{ github.event.release.name }}"
+          pr_label: "skip-changelog"
           github_token: ${{ secrets.GITHUB_TOKEN }}
