@@ -1,3 +1,7 @@
+## v0.1.6 - 2022-09-21
+
+- Updated changelog to include v0.1.5 github-actions (#11)
+
 ## v0.1.5 - 2022-09-21
 
 ### What’s Changed
