@@ -30,4 +30,17 @@ jobs:
       
       - name: "[Draft Release] - Create/Update GitHub Release ${{ steps.gitversion.outputs.majorMinorPatch }}"
         run: |
-          dotnet-gitreleasemanager create --owner edwinkortman --repository studious-funicular --token ${{ secrets.GITHUB_TOKEN }}
+          dotnet-gitreleasemanager create --owner edwinkortman --repository studious-funicular --token ${{ secrets.GITHUB_TOKEN }} --logFilePath output.txt || true
+          cat output.txt | grep 'No closed issues have been found for milestone\|Drafted release is available at' >> RELEASE_NOTES
+      
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ env.RELEASE_NOTES }}
+          draft: false
+          prerelease: false
