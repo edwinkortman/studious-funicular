@@ -5,6 +5,5 @@ change-title-escapes: '\<*_&@#'
 exclude_labels:
   - 'skip-changelog'
 template: |
-  ## What’s Changed
 
   $CHANGES
