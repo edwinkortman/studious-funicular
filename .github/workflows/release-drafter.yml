@@ -4,6 +4,9 @@ on:
     branches:
       - trunk
 
+permissions:
+  contents: read
+
 jobs:
   update_release_draft:
   
@@ -13,34 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: "[Setup] - .NET Core"
-        uses: actions/setup-dotnet@v2
+      - uses: release-drafter/release-drafter@v5
         with:
-          dotnet-version: 6.0.x
-
-      - name: "[Setup] - Install GitVersion"
-        uses: gittools/actions/gitversion/setup@v0.9.13
-        with:
-          versionSpec: '5.10.3'
-
-      - name: "[Setup] - Install GitReleaseManager"
-        uses: gittools/actions/gitreleasemanager/setup@v0.9.13
-        with:
-          versionSpec: '0.13.0'
-      
-      - name: "[Draft Release] - Create release notes"
-        run: |
-          dotnet-gitreleasemanager export --token ${{ secrets.GITHUB_TOKEN }} -o 'edwinkortman' -r 'studious-funicular' -f 'output.txt'
-          cat output.txt | grep 'No closed issues have been found for milestone\|Drafted release is available at' >> RELEASE_NOTES
-      
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+          disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: ${{ env.RELEASE_NOTES }}
-          draft: false
-          prerelease: false
