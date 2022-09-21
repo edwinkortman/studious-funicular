@@ -1,3 +1,8 @@
+## v0.1.7 - 2022-09-21
+
+- Update README.md `@edwinkortman` ([#15](https://github.com/edwinkortman/studious-funicular/pull/15))
+- Update README.md `@edwinkortman` ([#13](https://github.com/edwinkortman/studious-funicular/pull/13))
+
 ## v0.1.6 - 2022-09-21
 
 - Update README.md `@edwinkortman` (#13)
