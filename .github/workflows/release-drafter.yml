@@ -28,9 +28,9 @@ jobs:
         with:
           versionSpec: '0.13.0'
       
-      - name: "[Draft Release] - Create/Update GitHub Release ${{ steps.gitversion.outputs.majorMinorPatch }}"
+      - name: "[Draft Release] - Create release notes"
         run: |
-          dotnet-gitreleasemanager create --owner edwinkortman --repository studious-funicular --token ${{ secrets.GITHUB_TOKEN }} --logFilePath output.txt || true
+          dotnet-gitreleasemanager export --token ${{ secrets.GITHUB_TOKEN }} -o 'edwinkortman' -r 'studious-funicular' -f 'output.txt'
           cat output.txt | grep 'No closed issues have been found for milestone\|Drafted release is available at' >> RELEASE_NOTES
       
       - name: Create Release
