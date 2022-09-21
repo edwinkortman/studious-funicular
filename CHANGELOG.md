@@ -1,3 +1,10 @@
+## v0.1.5 - 2022-09-21
+
+### What’s Changed
+
+- Update changelog.yml `@edwinkortman` (#10)
+- Updated changelog to include v0.1.4 `@github-actions` (#9)
+
 ## v0.1.4 - 2022-09-21
 
 ### What’s Changed
