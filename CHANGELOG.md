@@ -1,3 +1,7 @@
+## v0.1.6 - 2022-09-21
+
+- Update README.md `@edwinkortman` (#13)
+
 ## v0.1.5 - 2022-09-21
 
 ### What’s Changed
