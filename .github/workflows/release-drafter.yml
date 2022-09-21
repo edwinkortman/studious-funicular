@@ -4,9 +4,6 @@ on:
     branches:
       - trunk
 
-permissions:
-  contents: read
-
 jobs:
   update_release_draft:
   
@@ -16,8 +13,22 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: release-drafter/release-drafter@v5
+      - name: "[Setup] - .NET Core"
+        uses: actions/setup-dotnet@v2
         with:
-          disable-autolabeler: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          dotnet-version: 6.0.x
+
+      - name: "[Setup] - Install GitVersion"
+        uses: gittools/actions/gitversion/setup@v0.9.13
+        with:
+          versionSpec: '5.10.3'
+
+      - name: "[Setup] - Install GitReleaseManager"
+        uses: gittools/actions/gitreleasemanager/setup@v0.9.13
+        with:
+          versionSpec: '0.13.0'
+      
+      - name: "[Draft Release] - Create/Update GitHub Release ${{ steps.gitversion.outputs.majorMinorPatch }}"
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          dotnet-gitreleasemanager create --owner corgibytes --repository freshli-cli --token ${{ secrets.GITHUB_TOKEN }} --milestone v${{ steps.gitversion.outputs.majorMinorPatch }}
